@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SelfServiceComponent } from './self-service.component';
+import { TicketStatusComponent } from './ticket-status.component';
 
-describe('SelfServiceComponent', () => {
-  let component: SelfServiceComponent;
-  let fixture: ComponentFixture<SelfServiceComponent>;
+describe('TicketStatusComponent', () => {
+  let component: TicketStatusComponent;
+  let fixture: ComponentFixture<TicketStatusComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SelfServiceComponent]
+      imports: [TicketStatusComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(SelfServiceComponent);
+    fixture = TestBed.createComponent(TicketStatusComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

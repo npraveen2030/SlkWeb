@@ -1,0 +1,19 @@
+.sidebar {
+  width: 60px;           /* Thin sidebar */
+  min-height: calc(100vh - 56px); /* Full height but start below navbar */
+  margin-top: 0;         /* aligns directly below navbar */
+}
+
+.sidebar a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 50px;
+  border-radius: 8px;
+}
+
+.sidebar a:hover {
+  background-color: #0d6efd; /* Bootstrap primary */
+  color: white !important;
+}

@@ -1,0 +1,59 @@
+<div class="card shadow-sm p-3">
+  <!-- Header with navigation -->
+   <div class="d-flex justify-content-between align-items-center mb-3">
+  <h5 class="m-0"><strong>Calendar</strong></h5>
+  <a 
+    class="text-primary text-decoration-none" 
+    data-bs-toggle="modal" 
+    role="button"
+  >
+    Holidays List
+  </a>
+</div>
+   
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <button class="btn btn-sm btn-outline-primary" (click)="prevYear()">
+      «
+    </button>
+    <button class="btn btn-sm btn-outline-primary" (click)="prevMonth()">
+      ‹
+    </button>
+
+    <h5 class="text-center m-0">
+      {{ currentDate | date: 'MMMM yyyy' }}
+    </h5>
+
+    <button class="btn btn-sm btn-outline-primary" (click)="nextMonth()">
+      ›
+    </button>
+    <button class="btn btn-sm btn-outline-primary" (click)="nextYear()">
+      »
+    </button>
+  </div>
+
+  <!-- Week Days -->
+  <div class="row text-center fw-bold border-bottom pb-2">
+    <div class="col">S</div>
+    <div class="col">M</div>
+    <div class="col">T</div>
+    <div class="col">W</div>
+    <div class="col">T</div>
+    <div class="col">F</div>
+    <div class="col">S</div>
+  </div>
+
+  <!-- Dates -->
+  <div *ngFor="let week of weeks" class="row text-center">
+    <div
+      *ngFor="let date of week"
+      class="col border p-2"
+      [class.text-muted]="!isCurrentMonth(date)"
+      [class.bg-primary]="isSelected(date)"
+      [class.text-white]="isSelected(date)"
+      (click)="selectDate(date)"
+      style="cursor: pointer;"
+    >
+      {{ date.getDate() }}
+    </div>
+  </div>
+</div>

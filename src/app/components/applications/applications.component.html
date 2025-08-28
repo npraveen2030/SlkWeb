@@ -1,83 +1,75 @@
-<div class="card shadow-sm p-3 h-100 mt-4">
+<div class="card shadow-sm p-3 h-100 mt-4">  
   <!-- Header Row -->
   <div class="d-flex justify-content-between align-items-center mb-3">
-  <div class="d-flex align-items-center">
-    <h5 class="mb-0 me-2">Applications</h5>
-    <i class="bi bi-pencil"></i>
+
+    <!-- Left: Heading -->
+    <div class="d-flex align-items-center">
+      <h5 class="mb-0 me-2">Applications</h5>
+      <i class="bi bi-pencil"></i>
+    </div>
+
+    <!-- Right: Search + View All -->
+    <div class="d-flex align-items-center gap-3">
+
+      
+      <!-- View All triggers Modal -->
+      <a class="text-primary text-decoration-none"
+         style="cursor: pointer;"
+         data-bs-toggle="modal"
+         data-bs-target="#appsModal">
+        View All
+      </a>
+    </div>
   </div>
-  <a class="text-primary text-decoration-none" data-bs-toggle="collapse" href="#moreApps" role="button" aria-expanded="false" aria-controls="moreApps">
-    View All
-  </a>
-</div>
 
   <hr>
 
   <!-- Default Button Grid (2 rows, 3 cols) -->
   <div class="row g-2">
-    <div class="col-4">
+    <div class="col-4" *ngFor="let app of defaultApps">
       <button class="btn btn-outline-primary w-100 h-100 text-truncate">
-        <i class="bi bi-person-circle me-2"></i> All About You (MySphere)
-      </button>
-    </div>
-    <div class="col-4">
-      <button class="btn btn-outline-primary w-100 h-100 text-truncate">
-        <i class="bi bi-tools me-2"></i> Log Tickets - ITIS & EIS (SNOW)
-      </button>
-    </div>
-    <div class="col-4">
-      <button class="btn btn-outline-primary w-100 h-100 text-truncate">
-        <i class="bi bi-cash-coin me-2"></i> SLK Digital Payroll (ASCENT PowerHR)
-      </button>
-    </div>
-    <div class="col-4">
-      <button class="btn btn-outline-primary w-100 h-100 text-truncate">
-        <i class="bi bi-bar-chart-line me-2"></i> ERP & Project Time (Nucleus Prime)
-      </button>
-    </div>
-    <div class="col-4">
-      <button class="btn btn-outline-primary w-100 h-100 text-truncate">
-        <i class="bi bi-mortarboard me-2"></i> Udemy Business
-      </button>
-    </div>
-    <div class="col-4">
-      <button class="btn btn-outline-primary w-100 h-100 text-truncate">
-        <i class="bi bi-heart-pulse me-2"></i> Know Your Insurance (Benefit You)
+        <i [class]="app.icon + ' me-2'"></i> {{app.label}}
       </button>
     </div>
   </div>
+</div>
 
-  <!-- Expandable More Buttons -->
-  <div class="collapse mt-3" id="moreApps">
-    <div class="row g-2">
-      <div class="col-4">
-        <button class="btn btn-outline-primary w-100 h-100 text-truncate">
-          <i class="bi bi-lightbulb me-2"></i> Idea Hub
-        </button>
+
+<!-- ================= MODAL FOR ALL APPS ================= -->
+<div class="modal fade" id="appsModal" tabindex="-1" aria-labelledby="appsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title">All Applications</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="col-4">
-        <button class="btn btn-outline-primary w-100 h-100 text-truncate">
-          <i class="bi bi-journal-text me-2"></i> Knowledge Base
-        </button>
-      </div>
-      <div class="col-4">
-        <button class="btn btn-outline-primary w-100 h-100 text-truncate">
-          <i class="bi bi-gear me-2"></i> System Config
-        </button>
-      </div>
-      <div class="col-4">
-        <button class="btn btn-outline-primary w-100 h-100 text-truncate">
-          <i class="bi bi-briefcase me-2"></i> HR Portal
-        </button>
-      </div>
-      <div class="col-4">
-        <button class="btn btn-outline-primary w-100 h-100 text-truncate">
-          <i class="bi bi-cloud-arrow-down me-2"></i> File Manager
-        </button>
-      </div>
-      <div class="col-4">
-        <button class="btn btn-outline-primary w-100 h-100 text-truncate">
-          <i class="bi bi-graph-up-arrow me-2"></i> Analytics Dashboard
-        </button>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+
+        <!-- Search Row (inside modal) -->
+        <div class="input-group input-group-sm mb-3" style="max-width: 250px; margin-left: auto;">
+          <span class="input-group-text bg-primary text-white">
+            <i class="bi bi-search"></i>
+          </span>
+          <input 
+            type="text" 
+            class="form-control" 
+            placeholder="Search applications..."
+            [(ngModel)]="searchTextApps">
+        </div>
+
+        <!-- Button Grid (3x4) -->
+        <div class="row g-3">
+          <div class="col-3" *ngFor="let app of allApps | filterButtons:searchTextApps">
+            <button class="btn btn-outline-primary w-100 h-100 text-truncate">
+              <i [class]="app.icon + ' me-2'"></i> {{app.label}}
+            </button>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>

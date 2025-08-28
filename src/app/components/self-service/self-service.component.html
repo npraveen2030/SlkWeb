@@ -1,11 +1,12 @@
-<div class="card shadow-sm p-3 h-100 mt-4"> 
+<div class="card shadow-sm p-3 h-100 mt-4">  
   <!-- Header Row -->
   <div class="d-flex justify-content-between align-items-center mb-3">
     <div class="d-flex align-items-center">
       <h5 class="mb-0 me-2">Self Service</h5>
       <i class="bi bi-pencil"></i>
     </div>
-    <a class="text-primary text-decoration-none" data-bs-toggle="collapse" href="#moreSelfService" role="button" aria-expanded="false" aria-controls="moreSelfService">
+    <!-- Trigger Modal -->
+    <a class="text-primary text-decoration-none" data-bs-toggle="modal" role="button" data-bs-target="#selfServiceModal">
       View All
     </a>
   </div>
@@ -14,71 +15,54 @@
 
   <!-- Default Button Grid (2 rows, 3 cols) -->
   <div class="row g-2">
-    <div class="col-4">
+    <div class="col-4" *ngFor="let button of defaultButtons">
       <button class="btn btn-outline-primary w-100 h-100 text-truncate">
-        <i class="bi bi-door-open me-2"></i> Conference Room
-      </button>
-    </div>
-    <div class="col-4">
-      <button class="btn btn-outline-primary w-100 h-100 text-truncate">
-        <i class="bi bi-calendar-plus me-2"></i> Apply Leave
-      </button>
-    </div>
-    <div class="col-4">
-      <button class="btn btn-outline-primary w-100 h-100 text-truncate">
-        <i class="bi bi-calendar-check me-2"></i> Attendance Regularization
-      </button>
-    </div>
-    <div class="col-4">
-      <button class="btn btn-outline-primary w-100 h-100 text-truncate">
-        <i class="bi bi-check2-square me-2"></i> My Approvals
-      </button>
-    </div>
-    <div class="col-4">
-      <button class="btn btn-outline-primary w-100 h-100 text-truncate">
-        <i class="bi bi-key me-2"></i> Nucleus Password Reset
-      </button>
-    </div>
-    <div class="col-4">
-      <button class="btn btn-outline-primary w-100 h-100 text-truncate">
-        <i class="bi bi-envelope-at me-2"></i> Email Signature
+        <i [class]="button.icon + ' me-2'"></i> {{button.label}}
       </button>
     </div>
   </div>
+</div>
 
-  <!-- Expandable More Buttons -->
-  <div class="collapse mt-3" id="moreSelfService">
-    <div class="row g-2">
-      <div class="col-4">
-        <button class="btn btn-outline-primary w-100 h-100 text-truncate">
-          <i class="bi bi-journal-check me-2"></i> Reports
-        </button>
+
+<!-- ================= MODAL ================= -->
+<div class="modal fade" id="selfServiceModal" tabindex="-1" aria-labelledby="selfServiceModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title">Self Service</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="col-4">
-        <button class="btn btn-outline-primary w-100 h-100 text-truncate">
-          <i class="bi bi-shield-lock me-2"></i> Security
-        </button>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+
+        <!-- Search Row -->
+<div class="input-group input-group-sm mb-3" style="max-width: 250px; margin-left: auto;">
+  <span class="input-group-text bg-primary text-white">
+    <i class="bi bi-search"></i>
+  </span>
+  <input 
+    type="text" 
+    class="form-control" 
+    placeholder="Search services..."
+    [(ngModel)]="searchText"
+  >
+</div>
+
+
+        <!-- Button Grid -->
+        <div class="row g-3">
+          <div class="col-3" *ngFor="let button of allButtons | filterButtons:searchText">
+            <button class="btn btn-outline-primary w-100 h-100 text-truncate">
+              <i [class]="button.icon + ' me-2'"></i> {{button.label}}
+            </button>
+          </div>
+        </div>
+
       </div>
-      <div class="col-4">
-        <button class="btn btn-outline-primary w-100 h-100 text-truncate">
-          <i class="bi bi-credit-card me-2"></i> Expenses
-        </button>
-      </div>
-      <div class="col-4">
-        <button class="btn btn-outline-primary w-100 h-100 text-truncate">
-          <i class="bi bi-gift me-2"></i> Rewards
-        </button>
-      </div>
-      <div class="col-4">
-        <button class="btn btn-outline-primary w-100 h-100 text-truncate">
-          <i class="bi bi-people me-2"></i> Teams
-        </button>
-      </div>
-      <div class="col-4">
-        <button class="btn btn-outline-primary w-100 h-100 text-truncate">
-          <i class="bi bi-lightning me-2"></i> Quick Actions
-        </button>
-      </div>
+
     </div>
   </div>
 </div>
